@@ -6,7 +6,7 @@ resource "grafana_cloud_provider_aws_cloudwatch_scrape_job" "aws_metrics" {
   export_tags             = true
   service {
     name                    = "AWS/ApplicationELB"
-    scrape_interval_seconds = 120
+    scrape_interval_seconds = 300
     metric {
       name       = "ActiveConnectionCount"
       statistics = ["Average"]
@@ -114,7 +114,7 @@ resource "grafana_cloud_provider_aws_cloudwatch_scrape_job" "aws_metrics" {
   }
   service {
     name                    = "AWS/ELB"
-    scrape_interval_seconds = 120
+    scrape_interval_seconds = 300
     metric {
       name       = "BackendConnectionErrors"
       statistics = ["Sum"]
@@ -170,7 +170,7 @@ resource "grafana_cloud_provider_aws_cloudwatch_scrape_job" "aws_metrics" {
   }
   service {
     name                    = "AWS/NetworkELB"
-    scrape_interval_seconds = 120
+    scrape_interval_seconds = 300
     metric {
       name       = "ActiveFlowCount"
       statistics = ["Sum"]
@@ -222,7 +222,7 @@ resource "grafana_cloud_provider_aws_cloudwatch_scrape_job" "aws_metrics" {
   }
   service {
     name                    = "AWS/EC2"
-    scrape_interval_seconds = 120
+    scrape_interval_seconds = 300
     metric {
       name       = "CPUUtilization"
       statistics = ["Maximum", "Average"]
@@ -298,7 +298,7 @@ resource "grafana_cloud_provider_aws_cloudwatch_scrape_job" "aws_metrics" {
   }
   service {
     name                    = "AWS/RDS"
-    scrape_interval_seconds = 120
+    scrape_interval_seconds = 300
     metric {
       name       = "BurstBalance"
       statistics = ["Average"]
@@ -386,7 +386,7 @@ resource "grafana_cloud_provider_aws_cloudwatch_scrape_job" "aws_metrics" {
   }
   service {
     name                    = "AWS/Lambda"
-    scrape_interval_seconds = 120
+    scrape_interval_seconds = 300
     metric {
       name       = "Duration"
       statistics = ["Maximum", "Minimum", "p90"]

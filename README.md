@@ -13,6 +13,19 @@ Prerequisites: [terraform](https://developer.hashicorp.com/terraform/tutorials/a
 
 ![Grafana CloudWatch Integration Role](images/role.png)
 
+Copy output in `terraform/role.tf`
+
+### Scrape job
+
+- Home > Observability > Cloud provider > AWS > Configuration > CloudWatch metrics > Create new scrape job
+
+And "Export as Terraform"
+![Grafana scrape job](images/scrape-job.png)
+
+Copy output in `terraform/scrape-job.tf`
+
+See [cloud_provider_aws_cloudwatch_scrape_job docs](https://registry.terraform.io/providers/grafana/grafana/latest/docs/resources/cloud_provider_aws_cloudwatch_scrape_job)
+
 ### Grafana Cloud authentication
 
 - [Configure Grafana Cloud authentication](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/monitor-cloud-provider/aws/cloudwatch-metrics/terraform-config/#configure-grafana-cloud-authentication)
@@ -33,13 +46,6 @@ Then, e.g.:
 ```
 
 Either use `GRAFANA_CLOUD_PROVIDER_URL` / `GRAFANA_CLOUD_PROVIDER_ACCESS_TOKEN` env variables or [configure the Terraform provider](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/monitor-cloud-provider/aws/cloudwatch-metrics/terraform-config/#configure-the-grafana-terraform-provider).
-
-### Add new scrape job
-
-- Home > Observability > Cloud provider > AWS > Configuration > CloudWatch metrics > Create new scrape job
-
-And "Export as Terraform"
-![Grafana scrape job](images/scrape-job.png)
 
 ### Apply terraform
 

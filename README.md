@@ -92,6 +92,10 @@ terraform apply
 - Home > Observability > Cloud provider > AWS > Alerts
 ![Grafana AWS alerts](images/aws-alerts.png)
 
+## References and further reading
+
+- [Grafana Cloud Provider Observability - AWS observability (docs)](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/monitor-cloud-provider/aws/)
+
 ## Cleanup
 
 ```sh

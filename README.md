@@ -1,6 +1,6 @@
-# aws-workshop-emeria
+# aws-grafana-workshop
 
-[awsworkshopemeria.grafana.net](https://awsworkshopemeria.grafana.net/)
+Set up AWS Cloud Provider Observability with Terraform in Grafana Cloud.
 
 Prerequisites: [terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli), [aws-cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 
@@ -8,8 +8,8 @@ Prerequisites: [terraform](https://developer.hashicorp.com/terraform/tutorials/a
 
 ### IAM Role
 
-- [Terraform config instructions (docs)](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/monitor-cloud-provider/aws/cloudwatch-metrics/terraform-config/)
 - Home > Observability > Cloud provider > AWS > Configuration > AWS accounts > Create new account
+- [Terraform config instructions (docs)](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/monitor-cloud-provider/aws/cloudwatch-metrics/terraform-config/)
 
 ![Grafana CloudWatch Integration Role](images/role.png)
 
@@ -19,12 +19,25 @@ Copy output in `terraform/role.tf`
 
 - Home > Observability > Cloud provider > AWS > Configuration > CloudWatch metrics > Create new scrape job
 
-And "Export as Terraform"
+Choose "Export as Terraform"
 ![Grafana scrape job](images/scrape-job.png)
 
 Copy output in `terraform/scrape-job.tf`
 
 See [cloud_provider_aws_cloudwatch_scrape_job docs](https://registry.terraform.io/providers/grafana/grafana/latest/docs/resources/cloud_provider_aws_cloudwatch_scrape_job)
+
+### Logs with Firehose
+
+- Home > Observability > Cloud provider > AWS > Configuration > Logs with Firehose
+
+Choose "Export as Terraform"
+![Grafana firehose](images/firehose.png)
+
+Copy output in `terraform/firehose.tf`
+
+See [Terraform docs](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/monitor-cloud-provider/aws/logs/firehose-logs/config-firehose-logs/#set-up-with-terraform)
+
+Configure CloudWatch logs through [subscription filters](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters.html#FirehoseExample)
 
 ### Grafana Cloud authentication
 
@@ -45,7 +58,7 @@ Then, e.g.:
 ]
 ```
 
-Either use `GRAFANA_CLOUD_PROVIDER_URL` / `GRAFANA_CLOUD_PROVIDER_ACCESS_TOKEN` env variables or [configure the Terraform provider](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/monitor-cloud-provider/aws/cloudwatch-metrics/terraform-config/#configure-the-grafana-terraform-provider).
+Either use `GRAFANA_CLOUD_PROVIDER_URL` / `GRAFANA_CLOUD_PROVIDER_ACCESS_TOKEN` env variables or [configure the Grafana Terraform provider](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/monitor-cloud-provider/aws/cloudwatch-metrics/terraform-config/#configure-the-grafana-terraform-provider).
 
 ### Apply terraform
 

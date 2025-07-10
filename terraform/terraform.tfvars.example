@@ -1,2 +1,7 @@
 external_id=""
 iam_role_name=""
+fallback_bucket_name=""
+firehose_stream_name=""
+target_endpoint=""
+logs_instance_id=""
+logs_write_token=""

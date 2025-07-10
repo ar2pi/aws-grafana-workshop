@@ -4,6 +4,8 @@ Set up AWS Cloud Provider Observability with Terraform in Grafana Cloud.
 
 Prerequisites: [terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli), [aws-cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 
+![Grafana AWS drawing](images/drawing.png)
+
 ## Setup
 
 ### IAM Role

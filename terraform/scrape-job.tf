@@ -404,4 +404,10 @@ resource "grafana_cloud_provider_aws_cloudwatch_scrape_job" "aws_metrics" {
       statistics = ["Sum"]
     }
   }
+
+  depends_on = [
+    aws_iam_role.grafana_labs_cloudwatch_integration,
+    aws_iam_role_policy.grafana_labs_cloudwatch_integration,
+    time_sleep.wait_10_seconds
+  ]
 }

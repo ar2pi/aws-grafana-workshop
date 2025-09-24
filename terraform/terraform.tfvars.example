@@ -1,7 +1,50 @@
-external_id=""
-iam_role_name=""
-fallback_bucket_name=""
-firehose_stream_name=""
-target_endpoint=""
+cloud_provider_token=""
+grafana_cloud_stack_slug=""
+
+# Use unique bucket names to avoid conflicts
+log_stream_fallback_bucket_name="awsworkshop-logs-fallback-1732564789"
+log_stream_name="awsworkshop-logs"
 logs_instance_id=""
 logs_write_token=""
+target_endpoint="https://aws-logs-prod-021.grafana.net/aws-logs/api/v1/push"
+metric_stream_fallback_bucket_name="awsworkshop-metrics-fallback-1732564789"
+metric_stream_name="awsworkshop-metrics"
+metrics_write_token=""
+
+# AWS namespaces to include in metric stream
+include_namespaces = [
+  "AWS/ApplicationELB",
+  "AWS/EBS",
+  "AWS/EC2",
+  "AWS/ECS",
+  "AWS/Lambda",
+  "AWS/NATGateway",
+  "AWS/RDS",
+  "AWS/S3",
+  //"AWS/AutoScaling",
+  //"AWS/EFS",
+  //"AWS/ElasticBeanstalk",
+  //"AWS/ELB",
+  //"AWS/ES",
+  //"AWS/Firehose",
+  //"AWS/Logs",
+  //"AWS/Prometheus",
+  //"AWS/Redshift",
+  //"AWS/SageMaker",
+  //"AWS/SageMaker/Endpoints",
+  //"AWS/Usage",
+  //"ECS/ContainerInsights",
+]
+
+aws_regions = [
+  "us-east-1",
+  "us-east-2",
+  "us-west-1",
+  "us-west-2",
+  "eu-central-1",
+  "eu-north-1",
+]
+
+# Feature Flags
+enable_log_stream = true
+enable_metric_stream = true

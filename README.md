@@ -28,6 +28,8 @@ Copy output in `terraform/metric-streams.tf`
 
 See [Terraform docs](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/monitor-cloud-provider/aws/cloudwatch-metrics/config-cw-metric-streams/#configure-metric-streams-with-terraform)
 
+> List of available metrics -> [here](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/monitor-cloud-provider/aws/cloudwatch-metrics/services/)
+
 ### Logs Stream
 
 - Home > Observability > Cloud provider > AWS > Configuration > Logs with Firehose

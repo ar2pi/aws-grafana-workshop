@@ -5,66 +5,7 @@
 //--------------------------------------------------------------------------------------//
 // Tested with hashicorp/aws v5.4.0 provider
 
-//--------------------------------------------------------------------------------------//
-//                           Terraform provider configuration                           //
-//--------------------------------------------------------------------------------------//
-
-# provider "aws" {
-#   // FILLME: AWS region
-#   region = "us-east-2"
-
-#   // FILLME: local AWS profile to use
-#   profile = "test-profile"
-# }
-
 data "aws_region" "current" {}
-
-//--------------------------------------------------------------------------------------//
-//                                      Variables                                       //
-//--------------------------------------------------------------------------------------//
-
-variable "fallback_bucket_name" {
-  type        = string
-  description = "Name of the S3 bucket where failed batches will be written to"
-}
-
-variable "firehose_stream_name" {
-  type        = string
-  description = "Name of the AWS Firehose delivery stream"
-}
-
-variable "target_endpoint" {
-  description = "Target endpoint for delivering logs to"
-  type        = string
-}
-
-variable "logs_instance_id" {
-  description = "Grafana Loki instance ID"
-  type        = number
-}
-
-variable "logs_write_token" {
-  description = "Grafana Cloud token used to write to Loki"
-  type        = string
-}
-
-variable "log_delivery_errors" {
-  description = "When enabled, delivery errors will be logged in the configured log group."
-  type        = bool
-  default     = false
-}
-
-variable "errors_log_group_name" {
-  description = "Name of the log group to use when `log_delivery_errors` is enabled."
-  type        = string
-  default     = "grafana_aws_logs_errors"
-}
-
-variable "errors_log_stream_name" {
-  description = "Name of the log stream to write to when `log_delivery_errors` is enabled."
-  type        = string
-  default     = "DeliveryErrors"
-}
 
 //--------------------------------------------------------------------------------------//
 //                                          S3                                          //
@@ -74,7 +15,7 @@ variable "errors_log_stream_name" {
 //
 
 resource "aws_s3_bucket" "fallback" {
-  bucket = var.fallback_bucket_name
+  bucket = var.log_stream_fallback_bucket_name
 }
 
 //--------------------------------------------------------------------------------------//
@@ -186,7 +127,7 @@ resource "aws_iam_role_policy" "logs" {
 //--------------------------------------------------------------------------------------//
 
 resource "aws_kinesis_firehose_delivery_stream" "main" {
-  name        = var.firehose_stream_name
+  name        = var.log_stream_name
   destination = "http_endpoint"
 
   // this block configures the main destination of the delivery stream
@@ -231,20 +172,3 @@ resource "aws_kinesis_firehose_delivery_stream" "main" {
     }
   }
 }
-
-//--------------------------------------------------------------------------------------//
-//                            CloudWatch logs subscriptions                             //
-//--------------------------------------------------------------------------------------//
-
-// This module snippet creates the main resources for moving logs from AWS into Grafan Cloud Loki.
-// To pump the logs into the delivery pipeline (firehose), log subscription filters are needed. The
-// example below shows how the snippet for creating one of these looks like.
-
-// resource "aws_cloudwatch_log_subscription_filter" "example-subscription" {
-//   name            = "grafana-logs-subscription"
-//   role_arn        = aws_iam_role.logs_subscription.arn
-//   log_group_name  = // log group where to read logs from
-//   filter_pattern  = // optional filtering pattern for subscription
-//   destination_arn = aws_kinesis_firehose_delivery_stream.main.arn
-//   distribution    = "ByLogStream"
-// }

@@ -10,7 +10,7 @@ Prerequisites: [terraform](https://developer.hashicorp.com/terraform/tutorials/a
 
 ### Grafana Cloud authentication
 
-- [Configure Grafana Cloud authentication](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/monitor-cloud-provider/aws/cloudwatch-metrics/terraform-config/#configure-grafana-cloud-authentication)
+- [Configure Grafana Cloud authentication](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/monitor-cloud-provider/aws/cloudwatch-metrics/config-cw-metric-scrape/#create-a-grafana-cloud-access-policy)
 
 ![Grafana access policy](images/access-policy.png)
 

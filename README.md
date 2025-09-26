@@ -8,44 +8,6 @@ Prerequisites: [terraform](https://developer.hashicorp.com/terraform/tutorials/a
 
 ## Setup
 
-### IAM Role
-
-- Home > Observability > Cloud provider > AWS > Configuration > AWS accounts > Create new account
-- [Terraform config instructions (docs)](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/monitor-cloud-provider/aws/cloudwatch-metrics/terraform-config/)
-
-![Grafana CloudWatch Integration Role](images/role.png)
-
-Copy output in `terraform/role.tf`
-
-### Metrics Stream
-
-- Home > Observability > Cloud provider > AWS > Configuration > CloudWatch metric streams
-
-Choose "Use Terraform"
-![Grafana scrape job](images/metric-streams.png)
-
-Copy output in `terraform/metric-streams.tf`
-
-See [Terraform docs](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/monitor-cloud-provider/aws/cloudwatch-metrics/config-cw-metric-streams/#configure-metric-streams-with-terraform)
-
-> List of available metrics -> [here](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/monitor-cloud-provider/aws/cloudwatch-metrics/services/)
-
-### Logs Stream
-
-- Home > Observability > Cloud provider > AWS > Configuration > Logs with Firehose
-
-Choose "Export as Terraform"
-![Grafana firehose](images/firehose.png)
-
-Copy output in `terraform/firehose.tf`
-
-See [Terraform docs](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/monitor-cloud-provider/aws/logs/firehose-logs/config-firehose-logs/#set-up-with-terraform)
-
-Configure CloudWatch logs through [subscription filters](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters.html#FirehoseExample)
-
-See logs -> https://dfce63.grafana.net/goto/aeyzu4fcl9ptsc?orgId=1
-> Search by `service_name = cloud/aws`
-
 ### Grafana Cloud authentication
 
 - [Configure Grafana Cloud authentication](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/monitor-cloud-provider/aws/cloudwatch-metrics/terraform-config/#configure-grafana-cloud-authentication)
@@ -67,7 +29,37 @@ Then, e.g.:
 
 Either use `GRAFANA_CLOUD_PROVIDER_URL` / `GRAFANA_CLOUD_PROVIDER_ACCESS_TOKEN` env variables or [configure the Grafana Terraform provider](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/monitor-cloud-provider/aws/cloudwatch-metrics/terraform-config/#configure-the-grafana-terraform-provider).
 
+### Metrics Stream
+
+- Home > Observability > Cloud provider > AWS > Configuration > CloudWatch metric streams
+
+Choose "Use Terraform"
+![Grafana scrape job](images/metric-streams.png)
+
+See [Terraform docs](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/monitor-cloud-provider/aws/cloudwatch-metrics/config-cw-metric-streams/#configure-metric-streams-with-terraform)
+
+Corresponding Terraform module is in [terraform/modules/metrics-stream](terraform/modules/metrics-stream)
+
+> List of available metrics -> [here](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/monitor-cloud-provider/aws/cloudwatch-metrics/services/)
+
+### Logs Stream
+
+- Home > Observability > Cloud provider > AWS > Configuration > Logs with Firehose
+
+Choose "Export as Terraform"
+![Grafana firehose](images/firehose.png)
+
+See [Terraform docs](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/monitor-cloud-provider/aws/logs/firehose-logs/config-firehose-logs/#set-up-with-terraform)
+
+Corresponding Terraform module is in [terraform/modules/logs-stream](terraform/modules/logs-stream)
+
+Configure CloudWatch logs through [subscription filters](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters.html#FirehoseExample)
+
+> Search logs by `service_name = cloud/aws`
+
 ### Apply terraform
+
+Copy `terraform/terraform.tfvars.example` to `terraform/terraform.tfvars` and adjust the values accordingly.
 
 Get `external_id` from the username / instance ID for your Grafana Cloud Prometheus. Also available in Grafana Cloud under AWS "Create new account" page details.
 
